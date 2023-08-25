@@ -1,0 +1,134 @@
+import React from "react";
+import "./App.css";
+
+function App() {
+
+    const [state,setState]=React.useState({
+        firstName:"",
+        lastName:"",
+        isSubscribed:true,
+        employment:""
+    });
+    const [pass,setPass]=React.useState("");
+
+    function changeHandler(event){
+
+        const {name,type,value,checked}=event.target;
+        setState((prevState)=>(
+                {...prevState,
+                [name]:type==="checkbox"?checked:value
+                }
+        ))
+    }
+
+    function submitHandle(event){
+        let p;
+        const pattern=/[\W\d]/;
+        const upper=/[A-Z]/;
+        const lower=/[a-z]/;
+        event.preventDefault();
+        if(pass.length>5&&pattern.test(pass)&&upper.test(pass)&&lower.test(pass)){
+            console.log(state,pass);
+        }
+        else{
+            alert("\n Weak Password \n Minimum length 6 characters \n Include special character \n Include lower and upper case");
+        }
+        
+    }
+
+    function handlePassword(event){
+        const {value}=event.target;
+        setPass(value);
+        
+    }
+
+    // React.useEffect(()=>{
+    //     console.log(pass);
+    // },[pass]);
+
+  return (
+    <div className="App">
+        <form>
+            <fieldset className="loginPage">
+                <legend> Login Details </legend>
+                
+                <label htmlFor="firstName">FirstName </label>
+                <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={state.firstName}
+                placeholder="firstName"
+                onChange={changeHandler} />
+
+                <label htmlFor="lastName">LastName </label>
+                <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={state.lastName}
+                placeholder="lastName"
+                onChange={changeHandler}
+                />
+
+                <label htmlFor="fullTime">Full-Time </label>
+                <input
+                type="radio"
+                name="employment"
+                id="fullTime"
+                value="fullTime"
+                onChange={changeHandler}
+                checked={state.employment==="fullTime"?true:false}
+                />
+
+                <label>Part Time</label>
+                <input 
+                type="radio"
+                name="employment"
+                value="partTime"
+                checked={state.employment==="partTime"?true:false}
+                onChange={changeHandler}
+                />
+
+                <label>Unemployed</label>
+                <input 
+                type="radio"
+                name="employment"
+                value="unemployed"
+                checked={state.employment==="unemployed"?true:false}
+                onChange={changeHandler}
+                />
+
+                <label>Paassword</label>
+                <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                onChange={handlePassword}
+                className={pass.length>5?"strong":"weak"}
+                />
+
+                <input
+                type="submit"
+                name="submit"
+                className="submit"
+                onClick={submitHandle}
+                />
+
+                <label>Subscribe to Newsletter </label>
+                <input
+                type="checkbox"
+                name="isSubscribed"
+                id="isSubscribed"
+                checked={state.isSubscribed}
+                onChange={changeHandler}
+                />
+            </fieldset>
+        </form>
+
+      
+    </div>
+  );
+}
+
+export default App;
