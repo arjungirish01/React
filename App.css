@@ -1,0 +1,33 @@
+.App{
+    background-color:white;
+    color:black;
+    border-radius:15px;
+}
+.root{
+    font-size:15px;
+}
+.loginPage{
+    display:grid;
+    grid-template-columns:1fr;
+    width:500px;
+}
+
+input{
+    margin:1em;
+}
+.submit{
+    background-color:blue;
+    color:white;
+    border-radius:100px;
+    border-style:none;
+}
+
+.strong:focus{
+    outline:none;
+    border-color:darkgreen;
+}
+
+.weak:focus{
+    outline:none;
+    border-color:red;
+}
